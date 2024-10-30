@@ -1,0 +1,77 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+      - feature/**
+      - hotfix/**
+      - bugfix/**
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+*
+  pull_request:
+    branches:
+      - main
+      - feature/**
+      - hotfix/**
+      - bugfix/**
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build Typescript
+        run: npm install && npm run build
+
+      - name: Lint
+        run: npm run lint
+
+  test:
+    name: Test (${{ matrix.node }})
+    needs: [build]
+    strategy:
+      matrix:
+        os:
+          - 'ubuntu-latest'
+        node:
+          - '22'
+          - '20'
+          - '18'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Print Node.js version
+        run: node -v
+
+      - name: Test
+        run: npm test
+
+  publish:
+    name: Publish
+    if: >-
+      (github.event_name == 'workflow_dispatch' || github.event_name == 'push') &&
+      startsWith(github.ref, 'refs/tags/v')
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish to NPM
+        run: |
+          echo "Hello"
