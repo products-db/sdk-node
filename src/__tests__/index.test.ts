@@ -8,7 +8,7 @@ jest.mock('https');
 
 describe('ProductsDBClient', () => {
   let client: ProductsDBClient;
-  const mockApiKey = 'test-api-key';
+  const mockApiKey = 'prdb_test-api-key';
 
   beforeEach(() => {
     client = new ProductsDBClient({ apiKey: mockApiKey });
@@ -69,8 +69,7 @@ describe('ProductsDBClient', () => {
 
       const responsePromise = client.search({ ean: '1234567890123' }, { language: PRDBSupportedLanguage.EN });
 
-      // Emit the response data with the correct structure
-      mockHttpResponse.emit('data', Buffer.from(JSON.stringify({ product: mockResponse })));
+      mockHttpResponse.emit('data', Buffer.from(JSON.stringify(mockResponse)));
       mockHttpResponse.emit('end');
 
       const response = await responsePromise;
@@ -102,10 +101,9 @@ describe('ProductsDBClient', () => {
 
       const responsePromise = client.search({ ean: '1234567890123' });
 
-      mockHttpResponse.emit('data', Buffer.from(JSON.stringify({ error: 'Product not found' })));
       mockHttpResponse.emit('end');
 
-      await expect(responsePromise).rejects.toThrow('Request failed');
+      await expect(responsePromise).rejects.toThrow('The product was not found.');
     });
 
     it('should handle timeout correctly', async () => {
