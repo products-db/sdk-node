@@ -1,0 +1,51 @@
+{
+  "name": "@products-db/sdk-node",
+  "version": "1.0.0",
+  "description": "Official Node.js SDK for ProductsDB: Effortlessly integrate product data into your applications with powerful features and seamless authentication.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/products-db/sdk-node.git"
+  },
+  "keywords": [
+    "products-db",
+    "sdk",
+    "nodejs",
+    "api",
+    "product-data",
+    "e-commerce",
+    "integration",
+    "javascript",
+    "data-retrieval",
+    "real-time",
+    "search",
+    "rest-api",
+    "npm",
+    "packages",
+    "developers"
+  ],
+  "author": "Products DB <support@products-db.com>",
+  "private": true,
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/products-db/sdk-node/issues"
+  },
+  "homepage": "https://github.com/products-db/sdk-node#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.12.2"
+  }
+}
