@@ -25,3 +25,45 @@ or, using yarn:
 ```bash
 yarn add products-db
 ```
+
+## Usage 💻
+
+### JavaScript Example
+
+Here’s a quick example of how to use the ProductsDB SDK in JavaScript to search for a product by its EAN code:
+
+```javascript
+// Import the SDK
+import { ProductsDB } from 'products-db';
+
+// Initialize the client with your API key
+const client = new ProductsDB({ apiKey: 'YOUR_API_KEY' });
+
+// Search for a product by EAN
+client
+  .search({ ean: '123456789012' })
+  .then((product) => console.log(product))
+  .catch((error) => console.error('Error fetching product:', error));
+```
+
+### TypeScript Example
+
+For TypeScript users, here’s how to set up and use the SDK with type definitions for enhanced development:
+
+```typescript
+// Import the SDK
+import { ProductsDB } from 'products-db';
+
+// Initialize the client with your API key
+const client = new ProductsDB({ apiKey: 'YOUR_API_KEY' });
+
+// Search for a product by EAN
+client
+  .search({ ean: '123456789012' })
+  .then((product) => console.log(product))
+  .catch((error) => console.error('Error fetching product:', error));
+```
+
+### Documentation 📚
+
+For more details on available endpoints and methods, please visit our [official documentation](https://docs.products-db.com).
