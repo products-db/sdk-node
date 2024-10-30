@@ -1,4 +1,5 @@
 import { PRDBClientConfig } from './interfaces/client-config.interface';
+import { PRDBProductResponse } from './interfaces/product-response.interface';
 import { PRDBResponse } from './interfaces/response.interface';
 import { PRDBSearchOptions } from './interfaces/search-options.interface';
 import { PRDBSearchQuery } from './interfaces/search-query.interface';
@@ -25,7 +26,7 @@ export class ProductsDBClient {
   private readonly defaultTimeout = 10000;
 
   constructor(config: PRDBClientConfig) {
-    this.config = config;
+    this.config = config || {};
     this.validateConfig();
   }
 
@@ -96,11 +97,33 @@ export class ProductsDBClient {
                 };
 
                 resolve({
-                  product: JSON.parse(data).product,
+                  product: JSON.parse(data) as PRDBProductResponse,
                   usage,
                 });
               } else {
-                reject(new PRDBError('Request failed', res.statusCode, data));
+                switch (res.statusCode) {
+                  case 403:
+                    reject(new PRDBError('The API key is invalid or missing.'));
+                    break;
+                  case 404:
+                    reject(new PRDBError('The product was not found.'));
+                    break;
+                  case 429:
+                    if (res.headers['retry-after']) {
+                      reject(
+                        new PRDBError(
+                          `You made too many requests in a short period of time. Read more about rate limiting in our documentation: https://docs.products-db.com/api-reference/introduction#rate-limits`
+                        )
+                      );
+                    } else {
+                      reject(
+                        new PRDBError('You reached your monthly limit. Please check our documentation for more information: https://docs.products-db.com/api-reference/introduction#quotas-and-credits')
+                      );
+                    }
+                    break;
+                  default:
+                    reject(new PRDBError('Request failed'));
+                }
               }
             } catch (error) {
               reject(new PRDBError('Failed to parse response'));
@@ -123,7 +146,7 @@ export class ProductsDBClient {
    * @throws {Error} If the API key is not provided
    */
   private validateConfig() {
-    if (!this.config.apiKey) {
+    if (!this.config.apiKey || typeof this.config.apiKey !== 'string' || !this.config.apiKey.startsWith('prdb_')) {
       throw new Error('You must provide an API key. If you do not have one, register at https://products-db.com.');
     }
   }
