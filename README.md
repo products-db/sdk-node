@@ -17,11 +17,11 @@
 To start using the ProductsDB Node.js SDK, simply install the package and follow our comprehensive documentation for setup and usage examples.
 
 ```bash
-npm install @products-db/sdk-node
+npm install products-db
 ```
 
 or, using yarn:
 
 ```bash
-yarn add @products-db/sdk-node
+yarn add products-db
 ```
