@@ -21,7 +21,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -29,24 +28,31 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build Typescript
-        run: npm install && npm run build
+        run: npm run build
 
       - name: Lint
         run: npm run lint
+
+      - name: Cache build output
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
 
   test:
     name: Test (${{ matrix.node }})
     needs: [build]
     strategy:
+      fail-fast: false
       matrix:
-        os:
-          - 'ubuntu-latest'
-        node:
-          - '22'
-          - '20'
-          - '18'
+        os: ['ubuntu-latest']
+        node: ['22', '20', '18']
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -55,9 +61,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          cache: 'npm'
 
-      - name: Print Node.js version
-        run: node -v
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore build output
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
 
       - name: Test
         run: npm test
@@ -72,6 +85,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Publish to NPM
-        run: |
-          echo "Hello"
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore build output
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+
+      # - name: Publish to NPM
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: npm publish
