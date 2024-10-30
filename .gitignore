@@ -32,3 +32,4 @@ coverage/
 .temp/
 *.bak
 *.tmp
+products-db-*.tgz
