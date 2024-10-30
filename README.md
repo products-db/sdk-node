@@ -2,7 +2,7 @@
   <a href="https://products-db.com/" target="blank"><img src="docs/logo-light.svg" width="200" alt="Products DB Logo" /></a>
 </p>
 
-<p align="center">Seamlessly integrate the power of **ProductsDB** into your Node.js applications with our SDK. Designed for simplicity and efficiency, this SDK provides an intuitive interface for accessing comprehensive product data, enabling developers to fetch, manage, and enrich product information effortlessly. 
+<p align="center">Seamlessly integrate the power of <strong>ProductsDB</strong> into your Node.js applications with our SDK. Designed for simplicity and efficiency, this SDK provides an intuitive interface for accessing comprehensive product data, enabling developers to fetch, manage, and enrich product information effortlessly. 
 </p>
 
 ## Features 🌟
