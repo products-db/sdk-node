@@ -34,14 +34,14 @@ Here’s a quick example of how to use the ProductsDB SDK in JavaScript to searc
 
 ```javascript
 // Import the SDK
-import { ProductsDB } from 'products-db';
+import { ProductsDBClient } from 'products-db';
 
 // Initialize the client with your API key
-const client = new ProductsDB({ apiKey: 'YOUR_API_KEY' });
+const client = new ProductsDBClient({ apiKey: 'YOUR_API_KEY' });
 
 // Search for a product by EAN
 client
-  .search({ ean: '123456789012' })
+  .search({ ean: '123456789012', language: 'ja' })
   .then((product) => console.log(product))
   .catch((error) => console.error('Error fetching product:', error));
 ```
@@ -52,14 +52,14 @@ For TypeScript users, here’s how to set up and use the SDK with type definitio
 
 ```typescript
 // Import the SDK
-import { ProductsDB } from 'products-db';
+import { ProductsDBClient } from 'products-db';
 
 // Initialize the client with your API key
-const client = new ProductsDB({ apiKey: 'YOUR_API_KEY' });
+const client = new ProductsDBClient({ apiKey: 'YOUR_API_KEY' });
 
 // Search for a product by EAN
 client
-  .search({ ean: '123456789012' })
+  .search({ ean: '123456789012', language: 'ja' })
   .then((product) => console.log(product))
   .catch((error) => console.error('Error fetching product:', error));
 ```
