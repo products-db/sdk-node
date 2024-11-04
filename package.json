@@ -1,5 +1,5 @@
 {
-  "name": "products-db",
+  "name": "@products-db/client",
   "version": "1.0.0",
   "description": "Official Node.js SDK for ProductsDB: Effortlessly integrate product data into your applications with powerful features and seamless authentication.",
   "main": "dist/index.js",
