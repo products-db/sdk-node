@@ -132,12 +132,6 @@ export interface PRDBPackshotResponse {
    * @type {'packshot'}
    */
   type: 'packshot';
-
-  /**
-   * Indicates whether the packshot image is safe for work.
-   * @type {boolean}
-   */
-  sfw: boolean;
 }
 
 /**
@@ -179,4 +173,10 @@ export interface PRDBBrandLogoResponse {
    * @type {'logo'}
    */
   type: 'logo';
+
+  /**
+   * The theme of the brand logo.
+   * @type {'light' | 'dark'}
+   */
+  theme: 'light' | 'dark';
 }
