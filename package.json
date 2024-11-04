@@ -35,7 +35,6 @@
     "developers"
   ],
   "author": "Products DB <support@products-db.com>",
-  "private": true,
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/products-db/sdk-node/issues"
