@@ -17,13 +17,13 @@
 To start using the ProductsDB Node.js SDK, simply install the package and follow our comprehensive documentation for setup and usage examples.
 
 ```bash
-npm install products-db
+npm install @products-db/client
 ```
 
 or, using yarn:
 
 ```bash
-yarn add products-db
+yarn add @products-db/client
 ```
 
 ## Usage 💻
@@ -34,7 +34,7 @@ Here’s a quick example of how to use the ProductsDB SDK in JavaScript to searc
 
 ```javascript
 // Import the SDK
-import { ProductsDBClient } from 'products-db';
+import { ProductsDBClient } from '@products-db/client';
 
 // Initialize the client with your API key
 const client = new ProductsDBClient({ apiKey: 'YOUR_API_KEY' });
@@ -52,7 +52,7 @@ For TypeScript users, here’s how to set up and use the SDK with type definitio
 
 ```typescript
 // Import the SDK
-import { ProductsDBClient } from 'products-db';
+import { ProductsDBClient } from '@products-db/client';
 
 // Initialize the client with your API key
 const client = new ProductsDBClient({ apiKey: 'YOUR_API_KEY' });
